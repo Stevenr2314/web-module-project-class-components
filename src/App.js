@@ -9,16 +9,34 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todoList: [""],
+      todoList: [],
       form: {todo: ""}
     };
+  }
+  handleChange = event =>{
+    let todo = {[event.target.name]: event.target.value}
+    this.setState({form: todo})
+  }
+
+  handleSubmit = event =>{
+    event.preventDefault();
+    let newTodo = this.state.form.todo
+    this.setState({todoList: [...this.state.todoList, newTodo]})
+  }
+  handleClear = () =>{
+    console.log('Clear!')
   }
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList todoList={this.state.todoList}/>
-        <TodoForm />
+        <TodoForm 
+          todoList={this.state.todoList}
+          form={this.state.form}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleClear={this.handleClear}/>
       </div>
     );
   }

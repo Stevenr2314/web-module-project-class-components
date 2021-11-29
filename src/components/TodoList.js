@@ -1,7 +1,13 @@
 import React from "react";
 
 const TodoList = props => {
-    props.todoList.forEach(todo => <div>{todo}</div>)
-}
+    if (props.todoList.length < 1){
+          return(<div>There are no todo items</div>) 
+    }
+    else{
+        return(props.todoList.map(todo => <div>{todo}</div>))
+     }
+    
+    }
 
 export default TodoList
