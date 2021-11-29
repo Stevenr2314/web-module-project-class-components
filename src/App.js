@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactDOM } from 'react';
 import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -8,7 +9,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todoList: [""]
+      todoList: [""],
+      form: {todo: ""}
     };
   }
   render() {
@@ -16,6 +18,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList todoList={this.state.todoList}/>
+        <TodoForm />
       </div>
     );
   }
