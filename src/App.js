@@ -10,7 +10,8 @@ class App extends React.Component {
     super();
     this.state = {
       todoList: [],
-      form: {todo: ""}
+      form: {todo: ""},
+      checkedTodo: []
     };
   }
   handleChange = event =>{
@@ -26,11 +27,16 @@ class App extends React.Component {
   handleClear = () =>{
     console.log('Clear!')
   }
+  handleTodoClick = event =>{
+    let todo = event.target.innerText
+    this.setState({checkedTodo: [...this.state.checkedTodo, todo]})
+    event.target.classList.toggle('crossed-todo')
+  }
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todoList={this.state.todoList}/>
+        <TodoList handleTodoClick={this.handleTodoClick} todoList={this.state.todoList}/>
         <TodoForm 
           todoList={this.state.todoList}
           form={this.state.form}
