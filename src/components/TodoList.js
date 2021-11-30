@@ -6,7 +6,7 @@ const TodoList = props => {
           return(<div>There are no todo items</div>) 
     }
     else{
-        return(props.todoList.map(todo => <Todo handleTodoClick={props.handleTodoClick} todo={todo}/>))
+        return(props.todoList.map(todo => <Todo key={Math.random()} handleTodoClick={props.handleTodoClick} todo={todo}/>))
      }
     
     }

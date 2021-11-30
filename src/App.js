@@ -23,19 +23,29 @@ class App extends React.Component {
     event.preventDefault();
     let newTodo = this.state.form.todo
     this.setState({todoList: [...this.state.todoList, newTodo]})
+    this.setState({form: {todo: ""}})
   }
   handleClear = () =>{
-    console.log('Clear!')
+    const {todoList, checkedTodo} = this.state
+    let remTodos = todoList.filter(todo => !checkedTodo.includes(todo))
+    this.setState({todoList: remTodos})
+    this.setState({checkedTodo: []})
   }
   handleTodoClick = event =>{
-    let todo = event.target.innerText
-    this.setState({checkedTodo: [...this.state.checkedTodo, todo]})
-    event.target.classList.toggle('crossed-todo')
+    let todoText = event.target.innerText
+    console.log(event.target)
+    event.target.classList.add('crossed')
+    if(this.state.checkedTodo.includes(todoText)){
+      let newChecked = this.state.checkedTodo.filter(todo => !todo===todoText)
+      this.setState({checkedTodo: newChecked})
+    } else {
+      this.setState({checkedTodo: [...this.state.checkedTodo, todoText]})
+    }
   }
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <h2>Welcome to my Todo App!</h2>
         <TodoList handleTodoClick={this.handleTodoClick} todoList={this.state.todoList}/>
         <TodoForm 
           todoList={this.state.todoList}
